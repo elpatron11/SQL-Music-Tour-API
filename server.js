@@ -2,13 +2,12 @@
 const express = require('express')
 const app = express()
 const { Sequelize } = require('sequelize')
+const bands = require('./controllers/bands_controller')
 
 // CONFIGURATION / MIDDLEWARE
 require('dotenv').config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-
-
 
 // ROOT
 app.get('/', (req, res) => {
@@ -16,15 +15,15 @@ app.get('/', (req, res) => {
         message: 'Welcome to the Tour API'
     })
 })
-// CONTROLLERS 
+
+// CONTROLLERS  
 const bandsController = require('./controllers/bands_controller')
 app.use('/bands', bandsController)
 
-
-const eventsController = require('./controllers/events_controller')
+const eventsController = require('./controllers/events_controllers')
 app.use('/events', eventsController)
 
-const stagesController = require('./controllers/stages_controller')
+const stagesController = require('./controllers/stages_controllers')
 app.use('/stages', stagesController)
 
 // LISTEN
